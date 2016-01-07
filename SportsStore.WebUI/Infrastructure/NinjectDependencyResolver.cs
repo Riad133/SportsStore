@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Moq;
 using Ninject;
 using SportsStore.Domain.Abstract;
+using SportsStore.Domain.Concrete;
 using SportsStore.Domain.Entities;
 
 namespace SportsStore.WebUI.Infrastructure
@@ -39,7 +40,9 @@ namespace SportsStore.WebUI.Infrastructure
                 new Product {Name = "Surf board", Price = 179},
                 new Product {Name = "Running shoes", Price = 95}
             });
-            kernel.Bind<IProductsRepository>().ToConstant(mock.Object);
+           // kernel.Bind<IProductsRepository>().ToConstant(mock.Object);
+            kernel.Bind<IProductsRepository>().To<EFProductRepository>();
+        
         }
 
     }
