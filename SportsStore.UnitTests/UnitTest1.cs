@@ -21,11 +21,11 @@ namespace SportsStore.UnitTests
             Mock<IProductRepository> mock= new Mock<IProductRepository>();
             mock.Setup(m => m.Products).Returns(new Product[]
             {
-                new Product {ProductID = 1, Name = "P1"},
-                new Product {ProductID = 2, Name = "P2"},
-                new Product {ProductID = 3, Name = "P3"},
-                new Product {ProductID = 4, Name = "P4"},
-                new Product {ProductID = 5, Name = "P5"}
+                new Product {ProductID = 1, Name = "P1",Category = "cat1"},
+                new Product {ProductID = 2, Name = "P2",Category = "cat2"},
+                new Product {ProductID = 3, Name = "P3",Category = "cat1"},
+                new Product {ProductID = 4, Name = "P4",Category = "cat2"},
+                new Product {ProductID = 5, Name = "P5",Category = "cat3"}
             });
 
 
@@ -33,14 +33,14 @@ namespace SportsStore.UnitTests
             controller.PageSize = 3;
             //ACT
 
-           
-           
-            ProductsListViewModel result = (ProductsListViewModel)controller.List(2).Model;
 
-            Product[] productArray = result.Products.ToArray();
-            Assert.IsTrue(productArray.Length==2);
-            Assert.AreEqual(productArray[0].Name,"P4");
-            Assert.AreEqual(productArray[1].Name, "P5");
+
+            Product[] result =( (ProductsListViewModel)controller.List(null, 1).Model).Products.ToArray();
+
+           
+            Assert.AreEqual(result.Length,3);
+            Assert.IsTrue(result[0].Name=="P1" && result[0].Category=="cat1");
+            Assert.IsTrue(result[1].Name== "P2" && result[1].Category=="cat2");
 
 
         }

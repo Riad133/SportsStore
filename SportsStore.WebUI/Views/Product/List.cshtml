@@ -1,4 +1,5 @@
 ﻿
+@using System.ComponentModel
 @model SportsStore.WebUI.Models.ProductsListViewModel
 
 @{
@@ -13,5 +14,5 @@
 <div class="btn-group pull-right">
 
    
-        @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { Page = x }))
+        @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { Page = x, category= Model.CurrentCategory }))
     </div>
